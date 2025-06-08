@@ -8,7 +8,7 @@ export default defineConfig([
     files: ["src/**/*.{js,mjs,cjs,ts,tsx}"],
     plugins: { js },
     extends: ["js/recommended"],
-    ignores: ["dist/**/*"],
+    ignores: ["dist/**/*", "**/*.test.{js,ts,tsx}", "**/*.spec.{js,ts,tsx}"],
     rules: {
       // Reglas básicas de estilo
       "indent": ["error", 2],
@@ -38,7 +38,7 @@ export default defineConfig([
       ecmaVersion: "latest",
       sourceType: "module",
     },
-    ignores: ["dist/**/*"]
+    ignores: ["dist/**/*", "**/*.test.{js,ts,tsx}", "**/*.spec.{js,ts,tsx}"]
   },
   tseslint.configs.recommended,
 ]);

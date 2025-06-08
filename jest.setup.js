@@ -1,3 +1,4 @@
+/* eslint-disable */
 require('@testing-library/jest-dom');
 
 // Mock window.matchMedia
@@ -13,4 +14,16 @@ Object.defineProperty(window, 'matchMedia', {
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
     })),
+});
+
+// Extend expect matchers
+expect.extend({
+    toHaveClass(received, ...expected) {
+        const pass = expected.every(className => received.classList.contains(className));
+        return {
+            message: () =>
+                `expected ${received} ${pass ? 'not ' : ''}to have class ${expected.join(', ')}`,
+            pass,
+        };
+    },
 }); 

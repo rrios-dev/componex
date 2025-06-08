@@ -1,4 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import tailwindcssPostcss from '@tailwindcss/postcss';
+import autoprefixer from 'autoprefixer';
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -6,6 +8,7 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
     "@chromatic-com/storybook"
   ],
@@ -15,7 +18,28 @@ const config: StorybookConfig = {
     options: {},
   },
 
-  docs: {},
+  docs: {
+    autodocs: 'tag',
+  },
+
+  core: {
+    builder: '@storybook/builder-vite',
+  },
+
+  async viteFinal(config) {
+    return {
+      ...config,
+      css: {
+        ...config.css,
+        postcss: {
+          plugins: [
+            tailwindcssPostcss,
+            autoprefixer,
+          ],
+        },
+      },
+    };
+  },
 
   typescript: {
     reactDocgen: "react-docgen-typescript"
