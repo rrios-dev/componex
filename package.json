@@ -1,6 +1,6 @@
 {
   "name": "componex",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A powerful, type-safe component styling library for React that combines the best of CSS-in-JS, utility-first CSS, and component composition. Features include variant support, polymorphic components, and seamless TypeScript integration.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -78,7 +78,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "storybook": "^8.6.14",
-    "tailwind-merge": "^3.3.0",
+    "tailwind-merge": "^2.5.5",
     "tailwindcss": "^4.1.8",
     "ts-jest": "^29.3.4",
     "tsup": "^8.5.0",
@@ -90,7 +90,7 @@
     "clsx": "^2.1.1",
     "react-dom": "^19.0.0",
     "react": "^19.0.0",
-    "tailwind-merge": "^3.3.0",
+    "tailwind-merge": "^2.5.5",
     "typescript": "^5.0.0"
   }
 }
