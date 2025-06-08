@@ -16,7 +16,6 @@
 - 🎭 **Variant Support**: Built-in support for component variants using class-variance-authority
 - 🧩 **Polymorphic Components**: Render components as different HTML elements using the `as` prop
 - 🚀 **Performance Optimized**: Minimal runtime overhead with smart prop handling
-- 📦 **Zero Dependencies**: Lightweight and dependency-free
 - 🎮 **Developer Experience**: Excellent IDE support with autocompletion
 
 ## 📦 Installation

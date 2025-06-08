@@ -1,449 +1,206 @@
-# Library Boilerplate - AI Development Guide
+# Componex - AI Analysis Documentation
 
-## Project Analysis
+## Metadata
+- **Library Type**: React Component Styling Library
+- **Primary Language**: TypeScript
+- **Framework**: React 18+
+- **Build System**: TypeScript, Babel
+- **Testing Framework**: Jest
+- **Documentation**: Storybook
+- **Package Manager**: Supports npm, yarn, pnpm, bun
 
-### Core Architecture
-This is a TypeScript library boilerplate designed for creating lightweight, type-safe libraries. The project follows a modular architecture with clear separation of concerns.
+## Core Architecture
 
-### Directory Structure Analysis
+### File Structure
 ```
-library-boilerplate/
-├── src/                    # Source code directory
-│   ├── index.ts           # Main entry point - exports public API
-│   ├── main.ts            # Core functionality implementation
-│   ├── types.ts           # TypeScript type definitions
-│   └── main.test.ts       # Test implementation
-├── dist/                   # Compiled output (generated)
-├── package.json           # Project configuration and dependencies
-├── tsconfig.json          # TypeScript configuration
-├── eslint.config.mjs      # ESLint configuration
-└── jest.config.js         # Jest test configuration
-```
-
-### File Purpose Analysis
-
-#### src/index.ts
-- Primary entry point for the library
-- Responsible for exporting public API
-- Should maintain clean exports without implementation details
-
-#### src/main.ts
-- Contains core library functionality
-- Should be modular and well-documented
-- Implements business logic
-
-#### src/types.ts
-- Contains all TypeScript type definitions
-- Should be comprehensive and well-documented
-- Exports all necessary types
-
-#### src/main.test.ts
-- Contains test implementations
-- Uses Jest testing framework
-- Should cover all edge cases
-
-## Technical Stack Analysis
-
-### Core Technologies
-- **Language**: TypeScript
-- **Build Tool**: tsup
-- **Testing**: Jest
-- **Linting**: ESLint
-- **Package Manager**: Bun/npm
-
-### Configuration Files
-
-#### package.json
-```json
-{
-  "main": "dist/index.js",        // CommonJS entry
-  "module": "dist/index.mjs",     // ESM entry
-  "types": "dist/index.d.ts",     // TypeScript definitions
-  "files": ["dist"]              // Published files
-}
+src/
+├── index.ts           # Main entry point
+├── componex.ts        # Core implementation
+├── types.ts           # TypeScript type definitions
+├── helpers/           # Utility functions
+├── __tests__/         # Test files
+└── componex.stories.tsx # Storybook documentation
 ```
 
-#### tsconfig.json
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "strict": true,
-    "declaration": true
-  }
-}
-```
+### Key Components
 
-#### eslint.config.mjs
-- Enforces code style and quality
-- TypeScript-specific rules
-- Best practices enforcement
+#### 1. Core Function (`componex`)
+- **Purpose**: Creates styled React components
+- **Input Types**: 
+  - Component (React component or HTML element)
+  - Options object (styling configuration)
+- **Output**: Styled React component with enhanced features
 
-## AI Development Guidelines
+#### 2. Type System
+- **Component Props**: Extends React's component props
+- **Variant System**: Type-safe variant definitions
+- **Polymorphic Types**: Support for `as` prop type safety
 
-### 1. Type Safety Implementation
+## Technical Specifications
+
+### 1. Component Creation
 ```typescript
-// ✅ Good Practice
-interface UserConfig {
-  name: string;
-  age: number;
-  preferences?: Record<string, unknown>;
-}
-
-// ❌ Bad Practice
-interface UserConfig {
-  name: any;
-  age: any;
-  preferences?: any;
-}
+type ComponexOptions = {
+  className?: string;
+  cva?: {
+    variants: Record<string, Record<string, string>>;
+    defaultVariants?: Record<string, string>;
+    compoundVariants?: Array<{
+      [key: string]: string;
+      className: string;
+    }>;
+  };
+};
 ```
 
-### 2. Error Handling Patterns
+### 2. Feature Matrix
+| Feature | Implementation | Type Safety | Performance Impact |
+|---------|---------------|-------------|-------------------|
+| Base Styling | className prop | ✅ | Low |
+| Variants | CVA integration | ✅ | Low |
+| Polymorphism | as prop | ✅ | Low |
+| Composition | Component nesting | ✅ | Low |
+
+### 3. Performance Characteristics
+- **Runtime Overhead**: Minimal
+- **Bundle Size**: Optimized
+- **Memory Usage**: Constant
+- **Render Performance**: O(1) for style application
+
+## Integration Points
+
+### 1. React Integration
+- **Component Lifecycle**: Standard React lifecycle
+- **Hooks Support**: Full compatibility
+- **Context Support**: Preserves React context
+
+### 2. Styling Integration
+- **CSS-in-JS**: Native support
+- **Utility Classes**: Tailwind CSS compatible
+- **Custom CSS**: Full support
+
+### 3. Type System Integration
+- **TypeScript**: First-class support
+- **Type Inference**: Automatic
+- **Type Safety**: Strict
+
+## Usage Patterns
+
+### 1. Basic Component
 ```typescript
-// ✅ Good Practice
-class LibraryError extends Error {
-  constructor(
-    message: string,
-    public readonly code: string,
-    public readonly details?: unknown
-  ) {
-    super(message);
-    this.name = 'LibraryError';
-  }
-}
-
-// Usage
-try {
-  // Implementation
-} catch (error) {
-  throw new LibraryError(
-    'Failed to process request',
-    'PROCESSING_ERROR',
-    { originalError: error }
-  );
-}
-```
-
-### 3. Testing Patterns
-```typescript
-// ✅ Good Practice
-describe('Library Functionality', () => {
-  it('should handle valid input', () => {
-    // Test implementation
-  });
-
-  it('should handle edge cases', () => {
-    // Edge case testing
-  });
-
-  it('should throw on invalid input', () => {
-    // Error case testing
-  });
+const Button = componex('button', {
+  className: 'base-button'
 });
 ```
 
-### 4. Documentation Patterns
+### 2. Variant Component
 ```typescript
-/**
- * Processes the input data according to the specified configuration.
- * 
- * @param input - The input data to process
- * @param config - Configuration options for processing
- * @returns Processed data
- * @throws {LibraryError} If processing fails
- * 
- * @example
- * ```typescript
- * const result = processData(input, { maxRetries: 3 });
- * ```
- */
-export function processData(input: unknown, config: ProcessConfig): ProcessedData {
-  // Implementation
-}
+const Button = componex('button', {
+  cva: {
+    variants: {
+      intent: {
+        primary: 'bg-blue-500',
+        secondary: 'bg-gray-500'
+      }
+    }
+  }
+});
 ```
 
-## AI Implementation Checklist
-
-### 1. Project Setup
-- [ ] Initialize project structure
-- [ ] Configure TypeScript
-- [ ] Set up ESLint
-- [ ] Configure Jest
-- [ ] Set up build process
-
-### 2. Core Implementation
-- [ ] Define types in `types.ts`
-- [ ] Implement core functionality in `main.ts`
-- [ ] Set up exports in `index.ts`
-- [ ] Implement error handling
-- [ ] Add input validation
-
-### 3. Testing
-- [ ] Write unit tests
-- [ ] Add integration tests
-- [ ] Implement edge case tests
-- [ ] Add error case tests
-- [ ] Ensure test coverage
-
-### 4. Documentation
-- [ ] Document public API
-- [ ] Add JSDoc comments
-- [ ] Create usage examples
-- [ ] Document error cases
-- [ ] Add type documentation
-
-### 5. Quality Assurance
-- [ ] Run ESLint
-- [ ] Run tests
-- [ ] Check type coverage
-- [ ] Verify build process
-- [ ] Test in different environments
-
-## Best Practices for AI Development
-
-### 1. Code Organization
-- Keep files focused and single-responsibility
-- Use clear naming conventions
-- Maintain consistent file structure
-- Follow modular design principles
-
-### 2. Type Safety
-- Use strict TypeScript configurations
-- Avoid `any` type
-- Define comprehensive interfaces
-- Use type guards when necessary
-
-### 3. Error Handling
-- Implement custom error classes
-- Provide meaningful error messages
-- Include error codes
-- Document error cases
-
-### 4. Testing
-- Write comprehensive tests
-- Cover edge cases
-- Test error scenarios
-- Maintain high test coverage
-
-### 5. Documentation
-- Document all public APIs
-- Include usage examples
-- Document error cases
-- Keep documentation up to date
-
-### 6. Performance
-- Optimize critical paths
-- Use appropriate data structures
-- Implement caching when needed
-- Monitor memory usage
-
-## Common Patterns and Anti-patterns
-
-### Patterns to Follow
+### 3. Polymorphic Component
 ```typescript
-// 1. Factory Pattern
-export function createInstance(config: Config): Instance {
-  return new Instance(config);
-}
-
-// 2. Builder Pattern
-export class Builder {
-  private config: Partial<Config> = {};
-  
-  withOption(option: keyof Config, value: Config[keyof Config]): this {
-    this.config[option] = value;
-    return this;
-  }
-  
-  build(): Config {
-    return this.config as Config;
-  }
-}
-
-// 3. Strategy Pattern
-export interface Strategy {
-  execute(data: unknown): Result;
-}
-
-export class Context {
-  constructor(private strategy: Strategy) {}
-  
-  executeStrategy(data: unknown): Result {
-    return this.strategy.execute(data);
-  }
-}
+const StyledComponent = componex('div', {
+  className: 'styled-component'
+});
 ```
 
-### Anti-patterns to Avoid
-```typescript
-// ❌ Global State
-let globalConfig: any;
+## Testing Strategy
 
-// ❌ Any Type
-function process(data: any): any {
-  return data;
-}
-
-// ❌ Unhandled Promises
-async function process() {
-  fetch('/api'); // Missing await
-}
-
-// ❌ Unsafe Type Assertions
-const data = input as any;
-```
-
-## Version Control Guidelines
-
-### Commit Messages
-```
-feat: add new feature
-fix: resolve bug
-docs: update documentation
-test: add tests
-refactor: restructure code
-chore: update dependencies
-```
-
-### Branch Strategy
-- `main`: Production-ready code
-- `develop`: Development branch
-- `feature/*`: New features
-- `fix/*`: Bug fixes
-- `release/*`: Release preparation
-
-## Release Process
-
-### 1. Version Update
-- Update version in `package.json`
-- Update CHANGELOG.md
-- Tag release in git
-
-### 2. Build Process
-- Run tests
-- Build library
-- Generate documentation
-- Create distribution files
-
-### 3. Publishing
-- Publish to npm
-- Create GitHub release
-- Update documentation
-
-## Maintenance Guidelines
-
-### 1. Dependency Updates
-- Regular security updates
-- Major version updates
-- Peer dependency updates
-- Development dependency updates
-
-### 2. Code Quality
-- Regular linting
+### 1. Unit Tests
+- Component creation
+- Prop handling
+- Variant application
 - Type checking
-- Test coverage
-- Performance monitoring
 
-### 3. Documentation
-- API documentation
-- Usage examples
-- Migration guides
-- Troubleshooting guides
+### 2. Integration Tests
+- React integration
+- Style application
+- Event handling
 
-## AI-Specific Considerations
+### 3. Performance Tests
+- Render performance
+- Memory usage
+- Bundle size
 
-### 1. Code Generation
-- Follow established patterns
-- Maintain consistency
-- Use appropriate abstractions
-- Consider maintainability
+## Error Handling
 
-### 2. Error Handling
-- Implement comprehensive error handling
-- Provide meaningful error messages
-- Include error codes
-- Document error cases
+### 1. Type Errors
+- Invalid variant values
+- Incorrect prop types
+- Missing required props
 
-### 3. Testing
-- Write comprehensive tests
-- Cover edge cases
-- Test error scenarios
-- Maintain high test coverage
+### 2. Runtime Errors
+- Invalid component usage
+- Style application failures
+- Polymorphic rendering issues
 
-### 4. Documentation
-- Document all public APIs
-- Include usage examples
-- Document error cases
-- Keep documentation up to date
+## Best Practices
 
-### 5. Performance
-- Optimize critical paths
-- Use appropriate data structures
-- Implement caching when needed
-- Monitor memory usage
+### 1. Component Creation
+- Use semantic class names
+- Leverage utility classes
+- Create reusable variants
 
-## CI/CD and GitHub Actions
+### 2. Performance
+- Minimize style recalculations
+- Use appropriate component composition
+- Optimize variant usage
 
-### GitHub Actions Workflow
-The project includes a GitHub Actions workflow for automated publishing to NPM. The workflow is triggered when a new release is created.
+### 3. Type Safety
+- Define strict variant types
+- Use proper type assertions
+- Maintain type consistency
 
-#### Workflow Steps
-1. **Checkout**: Clones the repository
-2. **Setup Node.js**: Configures Node.js environment
-3. **Install Dependencies**: Installs project dependencies
-4. **Build**: Builds the project
-5. **Test**: Runs the test suite
-6. **Publish**: Publishes to NPM
+## Limitations
 
-#### Configuration
-```yaml
-name: Publish Package to NPM
+### 1. Technical Limitations
+- No runtime style injection
+- Limited to React components
+- Requires TypeScript for full features
 
-on:
-  release:
-    types: [created]
+### 2. Usage Limitations
+- No direct CSS-in-JS runtime
+- Limited to class-based styling
+- No direct style object support
 
-jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+## Future Considerations
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
+### 1. Potential Enhancements
+- Runtime style injection
+- CSS-in-JS support
+- Style object support
 
-      - name: Install dependencies
-        run: npm ci
+### 2. Compatibility
+- React 19+ support
+- New CSS features
+- Additional styling solutions
 
-      - name: Build
-        run: npm run build
+## AI-Specific Notes
 
-      - name: Run tests
-        run: npm test
+### 1. Analysis Points
+- Component structure analysis
+- Type system understanding
+- Performance characteristics
+- Integration patterns
 
-      - name: Publish to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-```
+### 2. Common Patterns
+- Component creation
+- Variant usage
+- Style application
+- Type safety
 
-### Required Secrets
-- `NPM_TOKEN`: NPM authentication token for publishing
-
-### Publishing Process
-1. Create a new release in GitHub
-2. GitHub Actions workflow is triggered
-3. Package is built and tested
-4. If successful, package is published to NPM
-
-### Best Practices for CI/CD
-1. Always run tests before publishing
-2. Use semantic versioning
-3. Keep dependencies up to date
-4. Monitor build and test results
-5. Maintain security of secrets
+### 3. Edge Cases
+- Complex variant combinations
+- Polymorphic rendering
+- Style inheritance
+- Type inference limits
