@@ -1,6 +1,6 @@
 {
   "name": "componex",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A powerful, type-safe component styling library for React that combines the best of CSS-in-JS, utility-first CSS, and component composition. Features include variant support, polymorphic components, and seamless TypeScript integration.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
