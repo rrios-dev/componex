@@ -1,22 +1,22 @@
-import { Meta, StoryObj } from "@storybook/react";
-import componex from ".";
+import { Meta, StoryObj } from '@storybook/react';
+import componex from '.';
 
-const Button = componex("button", {
+const Button = componex('button', {
   cva: {
     variants: {
       variant: {
-        primary: "bg-blue-500",
-        secondary: "bg-red-500",
+        primary: 'bg-blue-500',
+        secondary: 'bg-red-500',
       },
     },
     defaultVariants: {
-      variant: "primary",
+      variant: 'primary',
     },
   },
 });
 
 const meta: Meta<typeof Button> = {
-  title: "componex",
+  title: 'componex',
   component: Button,
 };
 
@@ -24,7 +24,7 @@ export default meta;
 
 export const Default: StoryObj<typeof Button> = {
   args: {
-    children: "Click me",
-    variant: "primary",
+    children: 'Click me',
+    variant: 'primary',
   },
 };
